@@ -1,0 +1,8 @@
+1;
+
+function out = fence(r,c=r)
+  mat = ones(r, c);
+  mat(:,2:2:c) = 0
+end
+
+fence(8)
