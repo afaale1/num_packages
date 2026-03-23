@@ -1,0 +1,27 @@
+r = 1;
+theta = linspace(0,2*pi,100);
+x = r*cos(theta);
+y = r*sin(theta);
+A = rand(2);
+x0 = rand(2,1);
+[v,lambda] = eig(A);
+%b = rand(2,1);
+b = 0;
+
+
+axis equal;
+hold on;
+plot(x,y);
+quiver(0,0,v(1,1),v(2,1),'g','LineWidth', 2);
+quiver(0,0,v(1,2),v(2,2),'g','LineWidth', 2);
+
+for p=1:20
+  quiver(0,0,x0(1),x0(2), 0);
+  x0 = A*x0+b
+  x0 /= norm(x0);
+  pause(0.1);
+ endfor
+
+
+
+hold off;
