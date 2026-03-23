@@ -1,0 +1,39 @@
+pkg load image
+
+im = imread("C:/Users/afaal/Desktop/num_pack/octave/1.jpg");
+im_r = im(:,:,1);
+im_g = im(:,:,2);
+im_b = im(:,:,3);
+im_size = size(im_r)(1)*size(im_r)(2);
+
+colours_r = zeros(256,1 );
+colours_g = zeros(256,1);
+colours_b = zeros(256,1);
+
+for i = 1:im_size
+  colours_r(im_r(i)+1) += 1;
+ endfor;
+
+for i = 1:im_size
+  colours_g(im_g(i)+1) += 1;
+ endfor;
+
+for i = 1:im_size
+  colours_b(im_b(i)+1) += 1;
+ endfor;
+
+mat_r = reshape(colours_r,16,16);
+mat_g = reshape(colours_g,16,16);
+mat_b = reshape(colours_b,16,16);
+
+subplot(2,2,1);
+imshow(im);
+subplot(2,2,2);
+imshow(mat_r,[]);
+title("red");
+subplot(2,2,3);
+imshow(mat_g,[]);
+title("green");
+subplot(2,2,4);
+imshow(mat_b,[]);
+title("blue");
