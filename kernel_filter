@@ -1,0 +1,43 @@
+pkg load image
+
+
+
+function out = blur(ker,w,h, padded_im, final, count)
+
+for j = 2:w+1
+  for i = 2:h+1
+    window = ker.*padded_im(i-1:i+1,j-1:j+1);
+    final(i,j) = floor(sum(sum(window))/9);
+  endfor
+ endfor
+ subplot(2,2,count);
+ imshow(final)
+ count += 1;
+end
+
+
+im = imread("C:/Users/afaal/Desktop/num_pack/octave/1.jpg");
+im = rgb2gray(im);
+[h,w] = size(im);
+ker1 = ones(3);
+ker1(2,2) = 0;
+ker2 = [0,-1,0;-1,5,-1;,0,-1,0];
+ker3 = [-2,-1,0;,-1,1,1;0,1,2];
+
+final = zeros(h+2,w+2, "uint8");
+
+
+padded_im = zeros(h+2,w+2, "uint8");
+
+padded_im(2:h+1,2:w+1) = im;
+
+
+subplot(2,2,1);
+imshow(im)
+
+blur(ker1,w,h, padded_im, final, 2)
+
+blur(ker2,w,h, padded_im, final, 3)
+
+blur(ker3,w,h, padded_im, final, 4)
+
