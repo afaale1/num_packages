@@ -1,0 +1,3 @@
+
+get grayscaleimage. Then depending on threshold value make black and white from grayscale. LEt such an image represnt a map wherre black points are obstacles, white are free to move through places. 
+Suppose this map has an observer at a random place. Try to display on a polar grid the distance from the observer to the nearest obstacle.
