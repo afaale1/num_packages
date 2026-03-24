@@ -1,0 +1,74 @@
+------------------1-----------------
+1;
+% разностная система
+  u = @(x) 2*(x)*2;
+
+function res = y(k)
+  u = @(x) (x)*2;
+  r = 2; a = 0.5; b = 0.5;
+  if (k <= 0)
+    res = 0;
+  elseif (k == 1)
+    res = 1;
+  else
+    res = a*y(k-1) + a*y(k-2) + b*u(k-1) + b*u(k-2);
+  endif
+endfunction
+
+
+k_values = 0:20;
+y_values = zeros(1, 51);
+u_values = zeros(1, 51);
+
+for i = 1:length(k_values)
+  y_values(i) = y(k_values(i));
+endfor
+
+for i = 1:length(k_values)
+  u_values(i) = u(k_values(i));
+endfor
+
+figure;
+subplot(1,2,1);
+stem(k_values, y_values, 'filled', 'LineWidth', 2);
+grid on;
+xlabel('k');
+ylabel('y(k)');
+
+subplot(1,2,2);
+stem(k_values, u_values)
+
+
+---------------------1----------------
+
+
+---------------------2----------------
+k_max = 20;
+k_values = 0:k_max;
+u = @(k) 10*2*k;
+
+y = zeros(1, k_max + 1);
+u_val = zeros(1, k_max + 1);
+
+a = 0.5; b = 0.5;
+
+% Начальные условия: y(0)=0, y(1)=1 (согласно вашему коду)
+y(1) = 0;
+y(2) = 1;
+
+for k = 3:length(k_values)
+    idx = k; % индекс в массиве (k=0 это idx=1)
+    u_val(idx-1) = u(k-2);
+    u_val(idx) = u(k-1);
+
+    y(idx) = a*y(idx-1) + a*y(idx-2) + b*u(idx-1) + b*u(idx-2);
+end
+
+% Визуализация
+figure;
+subplot(1,2,1);
+stem(k_values, y, 'filled', 'r'); title('Выход y(k)'); grid on;
+subplot(1,2,2);
+stem(k_values, arrayfun(u, k_values), 'filled', 'b'); title('Вход u(k)'); grid on;
+--------------------------2----------------------
+
