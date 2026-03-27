@@ -1,0 +1,40 @@
+mobius strip
+
+
+% Parameters
+t = linspace(0, 2*pi, 800);
+R = 2;
+L = 1;
+spin_rate = 0.5;
+
+figure;
+hold on; grid on; axis equal;
+view(45, 30); % Tilt the view for a 3D perspective
+
+for i = 1:length(t)
+    % 1. Center of the segment on the circle
+    cx = R * cos(t(i));
+    cy = R * sin(t(i));
+    cz = 0;
+
+    % 2. Rotation angle for the segment
+    angle = t(i) * spin_rate;
+
+    % 3. Calculate 3D offsets
+    % (Rotating in the plane perpendicular to the circle's path)
+    dx = (L) * cos(angle) * cos(t(i));
+    dy = (L) * cos(angle) * sin(t(i));
+    dz = (L) * sin(angle);
+
+    % 4. Endpoints of the segment
+    x_coords = [cx - dx, cx + dx];
+    y_coords = [cy - dy, cy + dy];
+    z_coords = [cz - dz, cz + dz];
+
+
+    % 5. Plot and leave the segment there
+    plot3(x_coords, y_coords, z_coords, 'b', 'LineWidth', 1.2);
+
+    drawnow;
+end
+
