@@ -1,0 +1,16 @@
+theta = linspace(0, 2*pi, 100);
+x_orig = cos(theta);
+y = sin(theta);
+
+
+h = plot(x_orig, y, 'b', 'LineWidth', 2);
+axis([-2 10 -2 2]); % Fix axis limits
+axis equal;
+grid on;
+
+
+for offset = 0:0.1:8
+    set(h, 'XData', x_orig + offset);
+
+    pause(0.01);
+end
