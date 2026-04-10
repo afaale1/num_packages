@@ -1,0 +1,38 @@
+1;
+function meow(src, event)
+    persistent last_x last_y;
+
+    % Setup the figure only once if it doesn't exist
+    if nargin == 0
+        h = figure;
+        axis([0 10 0 10]);
+        set(h, 'WindowButtonDownFcn', @meow);
+        return; % Stop here; don't try to plot yet
+    end
+
+    % Standard callback logic
+    ax = gca;
+    pt = get(ax, 'CurrentPoint');
+    x = pt(1,1);
+    y = pt(1,2);
+
+    hold(ax, 'on');
+    if isempty(last_x)
+        plot(ax, x, y, 'ro', 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+    else
+        plot(ax, [last_x, x], [last_y, y], 'b-o', 'LineWidth', 2);
+    end
+
+    last_x = x;
+    last_y = y;
+end
+
+
+meow
+
+axes
+set(gca, 'buttondownfcn', @meow)
+pause(0.2)
+h1 = get(gca, 'children'))
+x1 = get(h1, 'xdata')
+y1 = get(h1, 'ydata')
